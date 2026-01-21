@@ -15,6 +15,12 @@
   "documentationUrl": null,
   "changelogUrl": null,
   "licensesUrl": null,
-  "samples": [],
+  "samples": [
+    {
+      "displayName": "Example Settings Definition Catalog",
+      "description": "An example definition catalog showing groups, typed defaults, and UI metadata.",
+      "path": "Samples~"
+    }
+  ],
   "hideInEditor": true
 }
