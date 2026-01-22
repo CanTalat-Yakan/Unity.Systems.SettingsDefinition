@@ -12,7 +12,7 @@ namespace UnityEssentials
         public new static SettingsDefinition GetOrCreate(string name = "Default") =>
             SettingsDefinitionRegistry.GetOrCreate(name, n => new SettingsDefinition(n));
 
-        public SettingsDefinition(string name) : base(name) { }
+        public SettingsDefinition(string name) : base(name, extension: "def.json") { }
 
         public new SettingsDefinitionBase GetValue(bool markDirty = true, bool notify = true) =>
             base.GetValue(markDirty, notify);
@@ -20,7 +20,7 @@ namespace UnityEssentials
         public new SettingsDefinitionBase Load() =>
             base.Load();
 
-        public SettingsDefinitionBuilder SetSlider(string key, float min, float max, float step, float? @default = null, string unit = null)
+        public SettingsDefinitionBuilder SetSlider(string key, float min, float max, float step, float? @default = 0, string unit = null)
         {
             var builder = GetOrCreateSetting(key, SettingsValueType.Float);
             if (@default.HasValue)
@@ -28,7 +28,7 @@ namespace UnityEssentials
             return builder.SetSlider(min, max, step, unit);
         }
 
-        public SettingsDefinitionBuilder SetIntSlider(string key, int min, int max, int step, int? @default = null, string unit = null)
+        public SettingsDefinitionBuilder SetIntSlider(string key, int min, int max, int step, int? @default = 0, string unit = null)
         {
             var builder = GetOrCreateSetting(key, SettingsValueType.Int);
             if (@default.HasValue)
@@ -36,7 +36,7 @@ namespace UnityEssentials
             return builder.SetSlider(min, max, step, unit);
         }
 
-        public SettingsDefinitionBuilder SetToggle(string key, bool? @default = null)
+        public SettingsDefinitionBuilder SetToggle(string key, bool? @default = false)
         {
             var builder = GetOrCreateSetting(key, SettingsValueType.Bool);
             if (@default.HasValue)
@@ -44,7 +44,7 @@ namespace UnityEssentials
             return builder.SetToggle();
         }
 
-        public SettingsDefinitionBuilder SetOptions(string key, IEnumerable<string> options, string @default = null, bool reverseOrder = false)
+        public SettingsDefinitionBuilder SetOptions(string key, IEnumerable<string> options, int @default = 0, bool reverseOrder = false)
         {
             var builder = GetOrCreateSetting(key, SettingsValueType.Enum);
             if (@default != null)
@@ -57,18 +57,17 @@ namespace UnityEssentials
             if (string.IsNullOrWhiteSpace(key)) key = string.Empty;
             var writableCatalog = GetValue(markDirty: true, notify: false);
 
-            SettingsMetaData def;
-            if (!writableCatalog.TryGetValue(key, out def) || def == null)
+            if (!writableCatalog.TryGetValue(key, out var metadata) || metadata == null)
             {
-                def = new SettingsMetaData() { Key = key, Type = type };
-                writableCatalog[key] = def;
+                metadata = new SettingsMetaData() { Key = key, Type = type };
+                writableCatalog[key] = metadata;
             }
 
-            def.Key = key;
-            def.Type = type;
-            def.Validate();
+            metadata.Key = key;
+            metadata.Type = type;
+            metadata.Validate();
 
-            return new SettingsDefinitionBuilder(def);
+            return new SettingsDefinitionBuilder(metadata);
         }
     }
 }
