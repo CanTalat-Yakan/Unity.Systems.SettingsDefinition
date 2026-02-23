@@ -1,5 +1,5 @@
 {
-    "name": "UnityEssentials.SettingsDefinition",
+    "name": "UnityEssentials.Systems.SettingsDefinition",
     "rootNamespace": "UnityEssentials",
     "references": [
         "GUID:ba233af9459ae120fa17ee4b9c745227",
