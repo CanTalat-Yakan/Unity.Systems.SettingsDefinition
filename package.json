@@ -1,14 +1,15 @@
 {
   "name": "com.unityessentials.systems.settingsdefinition",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "displayName": "Systems SettingsDefinition",
   "description": "This is a part of the UnityEssentials Ecosystem",
   "unity": "6000.0",
   "unityRelease": "",
+  "resolutionStrategy": "highestPatch",
   "dependencies": {
-    "com.unityessentials.editor.drawer.serializeddictionary": "~2.0.0",
-    "com.unityessentials.systems.serializer": "~2.0.0",
-    "com.unityessentials.systems.settingsprofile": "~2.0.0"
+    "com.unityessentials.editor.drawer.serializeddictionary": "2.0.0",
+    "com.unityessentials.systems.serializer": "2.0.0",
+    "com.unityessentials.systems.settingsprofile": "2.0.0"
   },
   "keywords": [],
   "author": {
