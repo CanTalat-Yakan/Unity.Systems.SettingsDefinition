@@ -44,7 +44,7 @@ namespace UnityEssentials
             return builder.SetToggle();
         }
 
-        public SettingsDefinitionBuilder SetOptions(string key, IEnumerable<string> options, int @default = 0, bool reverseOrder = false)
+        public SettingsDefinitionBuilder SetOptions(string key, IEnumerable<string> options, int? @default = 0, bool reverseOrder = false)
         {
             var builder = GetOrCreateSetting(key, SettingsValueType.Enum);
             if (@default != null)
